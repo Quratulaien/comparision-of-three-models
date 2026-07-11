@@ -1,138 +1,277 @@
-# ML Algorithm Comparison Assignment
-### KNN · Decision Tree · Naïve Bayes on the Iris Dataset
+<div align="center">
+
+# 🌸 Machine Learning Model Comparison
+### K-Nearest Neighbors • Decision Tree • Gaussian Naïve Bayes
+
+A comprehensive comparison of three classical supervised machine learning algorithms on the **Iris Dataset**, including hyperparameter tuning, performance evaluation, data visualization, and an interactive desktop application.
+
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Machine%20Learning-F7931E?logo=scikitlearn&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-Scientific%20Computing-013243?logo=numpy&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458?logo=pandas&logoColor=white)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-Visualization-11557C)
+
+</div>
 
 ---
 
-## Overview
+# 📖 Overview
 
-This project implements and compares three classical supervised machine-learning classifiers on the **Iris flower dataset** (UCI):
+Choosing the right machine learning model requires more than comparing accuracy.
 
-| Algorithm | Strategy | Key Hyperparameter |
-|---|---|---|
-| K-Nearest Neighbors | Instance-based, distance voting | k = 5 neighbors |
-| Decision Tree | Recursive binary splitting (Gini) | max_depth = 5 |
-| Naïve Bayes (Gaussian) | Probabilistic, feature independence | var_smoothing |
+This project evaluates three widely used supervised learning algorithms on the Iris dataset using a consistent preprocessing pipeline, hyperparameter optimization, and multiple evaluation metrics.
 
-**Dataset** — 150 samples · 4 features · 3 classes (Setosa, Versicolor, Virginica)
+The goal is to understand how each algorithm behaves, where it performs well, and the trade-offs between accuracy, interpretability, and computational efficiency.
 
 ---
 
-## Project Structure
+# ✨ Features
 
-```
-ml_assignment/
-├── main.py                  ← Core training, evaluation & all plots
-├── run_all.py               ← Run everything in one command
-├── requirements.txt
+✅ Data preprocessing & exploratory analysis
+
+✅ Hyperparameter tuning using GridSearchCV
+
+✅ Cross-validation
+
+✅ Feature importance analysis
+
+✅ Learning curves
+
+✅ Confusion matrices
+
+✅ PCA visualization
+
+✅ Interactive Tkinter application
+
+✅ Performance comparison dashboard
+
+---
+
+# 🤖 Algorithms Compared
+
+| Algorithm | Learning Type | Strength |
+|------------|--------------|-----------|
+| 🌿 K-Nearest Neighbors | Instance-Based | High accuracy |
+| 🌳 Decision Tree | Rule-Based | Easy to interpret |
+| 📊 Gaussian Naïve Bayes | Probabilistic | Fast training |
+
+---
+
+# 📊 Dataset
+
+**Dataset:** Iris Dataset (UCI)
+
+| Property | Value |
+|----------|------:|
+| Samples | 150 |
+| Features | 4 |
+| Classes | 3 |
+| Target | Iris Species |
+
+Features:
+
+- Sepal Length
+- Sepal Width
+- Petal Length
+- Petal Width
+
+Classes:
+
+- Setosa
+- Versicolor
+- Virginica
+
+---
+
+# 📂 Project Structure
+
+```text
+ml-assignment
+│
 ├── data/
-│   └── preprocessing.py     ← EDA, pair plots, PCA, box plots
+│   └── preprocessing.py
+│
 ├── models/
-│   └── train_evaluate.py    ← GridSearchCV tuning + learning curves
+│   └── train_evaluate.py
+│
 ├── ui/
-│   └── app.py               ← Interactive Tkinter GUI
-└── results/                 ← All generated plots (created on run)
+│   └── app.py
+│
+├── results/
+│
+├── main.py
+├── run_all.py
+├── requirements.txt
+└── README.md
 ```
 
 ---
 
-## Setup
+# 🔄 Machine Learning Workflow
+
+```text
+             Iris Dataset
+                  │
+                  ▼
+          Data Preprocessing
+                  │
+                  ▼
+        Exploratory Data Analysis
+                  │
+                  ▼
+         Train/Test Split (80/20)
+                  │
+                  ▼
+      Hyperparameter Optimization
+            (GridSearchCV)
+                  │
+                  ▼
+     Train Three ML Algorithms
+                  │
+                  ▼
+     Model Evaluation & Comparison
+                  │
+                  ▼
+      Interactive Prediction GUI
+```
+
+---
+
+# ⚙️ Installation
+
+Clone the repository
 
 ```bash
-# 1. Install dependencies
+git clone https://github.com/Quratulaien/comparision-of-three-models.git
+```
+
+Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-# 2. Run everything
+Run the complete pipeline
+
+```bash
 python run_all.py
+```
 
-# 3. Launch the interactive UI
+Launch the GUI
+
+```bash
 python ui/app.py
 ```
 
 ---
 
-## Pipeline
+# 📈 Evaluation Metrics
 
-### 1. Data Preprocessing (`data/preprocessing.py`)
-- Load Iris via `sklearn.datasets.load_iris`
-- Summary statistics (min, max, mean, std) per feature
-- Missing value check (none)
-- Visualisations: pair plots, box plots, PCA 2D projection
+Each model is evaluated using:
 
-### 2. Feature Selection
-All 4 features retained (sepal/petal length & width). Decision tree feature importances confirm **petal length** and **petal width** dominate (~95% combined importance). `StandardScaler` applied (fit on train, transform test).
-
-### 3. Train/Test Split
-- 80 % training, 20 % test, **stratified** by class
-- Fixed `random_state=42` for reproducibility
-
-### 4. Model Training (`main.py`)
-- KNN with k=5, Euclidean distance
-- Decision Tree with max_depth=5, Gini criterion
-- Gaussian Naïve Bayes with default var_smoothing
-
-### 5. Hyperparameter Tuning (`models/train_evaluate.py`)
-- `GridSearchCV` with 5-fold cross-validation
-- KNN: k ∈ [1,20] × weights × metric
-- DT: max_depth × min_samples_split × criterion
-- NB: var_smoothing over 20 log-spaced values
-
-### 6. Evaluation Metrics
-Per model, per class and macro-averaged:
-- **Accuracy** — overall correct predictions
-- **Precision** — TP / (TP + FP)
-- **Recall** — TP / (TP + FN)
-- **F1 Score** — harmonic mean of precision & recall
-- **Confusion Matrix** — per-class breakdown
-- **5-fold CV score** — generalisation estimate
+- Accuracy
+- Precision
+- Recall
+- F1 Score
+- Confusion Matrix
+- 5-Fold Cross Validation
+- Learning Curves
 
 ---
 
-## Generated Plots
+# 📊 Visualizations
 
-| File | Content |
-|---|---|
-| `01_metrics_comparison.png` | Accuracy / Precision / Recall / F1 bar chart |
-| `02_confusion_matrices.png` | 3-panel confusion matrices |
-| `03_cross_validation.png` | 5-fold CV mean ± std |
-| `04_feature_analysis.png` | DT feature importances + correlation heatmap |
-| `05_decision_tree_plot.png` | Decision tree structure (depth ≤ 3) |
-| `06_knn_k_tuning.png` | Accuracy vs k (1–20) |
-| `07_per_class_f1.png` | Per-class F1 grouped bars |
-| `08_pair_plot.png` | Feature pair plot |
-| `09_box_plots.png` | Box plots per class |
-| `10_pca_projection.png` | PCA 2D scatter |
-| `11_learning_curves.png` | Learning curves (tuned models) |
-| `12_default_vs_tuned.png` | Default vs tuned accuracy |
+The project automatically generates:
+
+- 📈 Metrics Comparison
+- 📉 Cross Validation Results
+- 🌳 Decision Tree Visualization
+- 📊 Feature Importance
+- 🔥 Correlation Heatmap
+- 📌 Pair Plot
+- 📦 Box Plots
+- 🎯 PCA Projection
+- 📈 Learning Curves
+- 📉 Hyperparameter Tuning Results
 
 ---
 
-## Interactive UI (`ui/app.py`)
+# 🖥 Desktop Application
 
-- Sliders for all 4 Iris features with live value display
-- Algorithm selector (radio buttons): KNN / Decision Tree / Naïve Bayes
-- **Classify** button → shows predicted class, confidence, probability bars
-- All 3 models predict simultaneously for comparison
-- Quick preset buttons for representative Setosa / Versicolor / Virginica samples
-- Live accuracy badges for all three models
+The project includes a Tkinter-based desktop interface that allows users to classify Iris flowers interactively.
 
----
+### Features
 
-## Key Findings
-
-| Metric | KNN (k=5) | Decision Tree | Naïve Bayes |
-|---|---|---|---|
-| Test Accuracy | ~97% | ~97% | ~93% |
-| Macro F1 | ~0.97 | ~0.97 | ~0.93 |
-| Setosa F1 | 1.00 | 1.00 | 1.00 |
-| Train time | fast | fast | very fast |
-| Interpretable | ✗ | ✓ | partial |
-
-- **Setosa** is linearly separable; all models achieve 100 % on it.
-- **Versicolor / Virginica** overlap slightly; NB makes occasional errors there.
-- **KNN and DT** are comparable; DT has the advantage of interpretability.
-- **Naïve Bayes** is fastest and simplest, slightly lower accuracy due to feature-independence assumption (petal features are highly correlated).
+- Live feature sliders
+- Algorithm selector
+- Confidence scores
+- Prediction probabilities
+- One-click sample inputs
+- Compare predictions from all three models
 
 ---
 
-*Submitted for: Machine Learning Algorithms Assignment*
-*Dataset: UCI Iris · sklearn 1.3+ · Python 3.9+*
+# 📊 Results
+
+| Model | Accuracy | F1 Score | Speed | Interpretability |
+|------|----------:|----------:|------:|:---------------:|
+| KNN | ~97% | ~0.97 | ⭐⭐⭐ | ⭐ |
+| Decision Tree | ~97% | ~0.97 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| Naïve Bayes | ~93% | ~0.93 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
+
+---
+
+# 💡 Key Insights
+
+- Decision Trees provide strong performance while remaining easy to interpret.
+- KNN achieved comparable accuracy but requires storing the training data.
+- Gaussian Naïve Bayes trains extremely quickly but is affected by correlated features.
+- Petal Length and Petal Width contribute the most to classification performance.
+
+---
+
+# 🚀 Future Improvements
+
+- Support Vector Machine
+- Random Forest
+- XGBoost
+- Neural Networks
+- Model Deployment with FastAPI
+- Streamlit Web Application
+
+---
+
+# 📚 Learning Outcomes
+
+This project strengthened my understanding of:
+
+- Supervised Machine Learning
+- Feature Engineering
+- Model Evaluation
+- Hyperparameter Optimization
+- Data Visualization
+- Building Interactive ML Applications
+
+---
+
+# 👩‍💻 Author
+
+## Qurat ul Aien
+
+**Aspiring AI/ML Engineer**
+
+Interested in
+
+- Machine Learning
+- Deep Learning
+- Large Language Models
+- Computer Vision
+- Explainable AI
+
+---
+
+<div align="center">
+
+### ⭐ If you found this project useful, consider giving it a star!
+
+</div>
